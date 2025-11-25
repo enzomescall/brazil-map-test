@@ -1,76 +1,66 @@
 extends Node2D
 
+# NOTE: ProvinceData is now a global class defined in province_data.gd.
+
 # SIGNALS
-signal province_selected(province_data)
+signal province_selected(province_data: ProvinceData)
 
 # CONFIGURATION
 @export var province_map_texture: Texture2D # The distinct color map
 @export var visual_map_sprite: Sprite2D     # The pretty map the user sees
+@export var province_inspector: PanelContainer # Reference to the UI Panel
 
 # STATE
 var map_image: Image
 var province_registry: Dictionary = {}
 var selected_province: ProvinceData = null
 
-func _ready():
-	# 1. Load the image data from the texture for pixel reading
-	# NOTE: In Godot Import settings for the texture, enable "Read/Write" access!
+func _ready() -> void:
 	if province_map_texture:
+		# NOTE: Must create the image for pixel reading
 		map_image = province_map_texture.get_image()
 	
-	# 2. Initialize Brazil Data (Mock Data)
-	# In a real game, this would loop through a CSV file
 	setup_brazil_data()
+	
+	if province_inspector:
+		province_selected.connect(province_inspector.update_province_data)
 
-func setup_brazil_data():
-	# Define colors matching your distinct color map image
-	# Example: Amazonas is Green, Sao Paulo is Blue, etc.
-	
-	# Amazonas (Pure Green)
-	register_province("Amazonas", Color(0, 1, 0, 1), 4200000, 100.0)
-	
-	# São Paulo (Pure Blue)
-	register_province("São Paulo", Color(0, 0, 1, 1), 44000000, 600.0)
-	
-	# Rio de Janeiro (Pure Red)
-	register_province("Rio de Janeiro", Color(1, 0, 0, 1), 17000000, 200.0)
-	
-	# Minas Gerais (Yellow)
-	register_province("Minas Gerais", Color(1, 1, 0, 1), 21000000, 180.0)
+func setup_brazil_data() -> void:
+	# Use colors from your map image (Amazonas, Sao Paulo, Rio, Minas)
+	register_province("Amazonas", Color.html("#2e6a32"), 4200000, 100.0)
+	register_province("São Paulo", Color.html("#2e6396"), 44000000, 600.0)
+	register_province("Rio de Janeiro", Color.html("#a34125"), 17000000, 200.0)
+	register_province("Minas Gerais", Color.html("#757530"), 21000000, 180.0)
 
-func register_province(p_name, p_color, p_pop, p_gdp):
-	var new_prov = ProvinceData.new(p_name, p_color, p_pop, p_gdp)
-	# We use the color string as the key for fast lookup
+func register_province(p_name: String, p_color: Color, p_pop: int, p_gdp: float) -> void:
+	# Use the global class name ProvinceData
+	var new_prov: ProvinceData = ProvinceData.new(p_name, p_color, p_pop, p_gdp)
 	province_registry[p_color.to_html(false)] = new_prov
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		handle_click(get_global_mouse_position())
 
-func handle_click(global_pos: Vector2):
-	# Convert global world position to local sprite pixel coordinates
-	var local_pos = visual_map_sprite.to_local(global_pos)
+func handle_click(global_pos: Vector2) -> void:
+	if not map_image:
+		return
+
+	var local_pos: Vector2 = visual_map_sprite.to_local(global_pos)
 	
-	# Adjust for sprite centering logic if necessary. 
-	# Assuming Sprite is centered:
-	var texture_size = province_map_texture.get_size()
-	var pixel_x = local_pos.x + (texture_size.x / 2)
-	var pixel_y = local_pos.y + (texture_size.y / 2)
+	var texture_size: Vector2 = province_map_texture.get_size()
+	var pixel_x: float = local_pos.x + (texture_size.x / 2.0)
+	var pixel_y: float = local_pos.y + (texture_size.y / 2.0)
 	
-	# Check bounds
-	if pixel_x < 0 or pixel_x >= texture_size.x or pixel_y < 0 or pixel_y >= texture_size.y:
-		return # Clicked outside map
+	if pixel_x < 0.0 or pixel_x >= texture_size.x or pixel_y < 0.0 or pixel_y >= texture_size.y:
+		province_selected.emit(null) 
+		return 
 	
-	# Get color from the data map
-	var clicked_color = map_image.get_pixel(int(pixel_x), int(pixel_y))
-	
-	# Lookup province
-	var color_key = clicked_color.to_html(false) # Convert to Hex String (e.g. "ff0000")
+	var clicked_color: Color = map_image.get_pixel(int(pixel_x), int(pixel_y))
+	var color_key: String = clicked_color.to_html(false)
 	
 	if province_registry.has(color_key):
-		selected_province = province_registry[color_key]
-		province_selected.emit(selected_province)
-		print("Selected: " + selected_province.name)
+		selected_province = province_registry[color_key] as ProvinceData
+		province_selected.emit(selected_province) 
 	else:
-		print("Clicked unidentified territory. Color: " + color_key)
 		selected_province = null
+		province_selected.emit(null)

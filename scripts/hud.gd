@@ -54,15 +54,9 @@ func _on_pause_button_pressed():
 
 func _on_speed_1x_button_pressed():
 	game_manager.set_speed(5)
-	if game_manager.is_paused:
-		game_manager.toggle_pause()
 
 func _on_speed_2x_button_pressed():
 	game_manager.set_speed(2)
-	if game_manager.is_paused:
-		game_manager.toggle_pause()
 
 func _on_speed_5x_button_pressed():
 	game_manager.set_speed(1)
-	if game_manager.is_paused:
-		game_manager.toggle_pause()
