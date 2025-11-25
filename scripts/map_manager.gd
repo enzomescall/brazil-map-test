@@ -17,7 +17,6 @@ var selected_province: ProvinceData = null
 
 func _ready() -> void:
 	if province_map_texture:
-		# NOTE: Must create the image for pixel reading
 		map_image = province_map_texture.get_image()
 	
 	setup_brazil_data()
@@ -27,18 +26,19 @@ func _ready() -> void:
 
 func setup_brazil_data() -> void:
 	# Use colors from your map image (Amazonas, Sao Paulo, Rio, Minas)
-	register_province("Amazonas", Color.html("#2e6a32"), 4200000, 100.0)
-	register_province("São Paulo", Color.html("#2e6396"), 44000000, 600.0)
-	register_province("Rio de Janeiro", Color.html("#a34125"), 17000000, 200.0)
-	register_province("Minas Gerais", Color.html("#757530"), 21000000, 180.0)
+	register_province("Amazonas", Color.html("#00ff00"), 4200000, 100.0)
+	register_province("São Paulo", Color.html("#0000ff"), 44000000, 600.0)
+	register_province("Rio de Janeiro", Color.html("#ff0000"), 17000000, 200.0)
+	register_province("Minas Gerais", Color.html("#ffff00"), 21000000, 180.0)
 
 func register_province(p_name: String, p_color: Color, p_pop: int, p_gdp: float) -> void:
-	# Use the global class name ProvinceData
 	var new_prov: ProvinceData = ProvinceData.new(p_name, p_color, p_pop, p_gdp)
 	province_registry[p_color.to_html(false)] = new_prov
 
 func _unhandled_input(event: InputEvent) -> void:
+	# DEBUG CHECK: This print will now only show up if the mouse input is NOT blocked by UI elements.
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("--- Input received by Map Manager ---")
 		handle_click(get_global_mouse_position())
 
 func handle_click(global_pos: Vector2) -> void:
@@ -60,7 +60,9 @@ func handle_click(global_pos: Vector2) -> void:
 	
 	if province_registry.has(color_key):
 		selected_province = province_registry[color_key] as ProvinceData
+		print("Selected Province: " + selected_province.name)
 		province_selected.emit(selected_province) 
 	else:
 		selected_province = null
+		print("Selected Province: None (Water/Unclaimed) - Clicked Color: " + clicked_color.to_html(false))
 		province_selected.emit(null)

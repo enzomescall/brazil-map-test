@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hnvqfomufyjs"]
 
-[ext_resource type="Script" uid="uid://dgp301qu1stl0" path="res://scripts/hud.gd" id="1_37p78"]
+[ext_resource type="Script" uid="uid://dptg4ylv2g5g3" path="res://scripts/hud.gd" id="1_37p78"]
 
 [node name="TopBar" type="CanvasLayer" node_paths=PackedStringArray("date_label", "resources_label")]
 script = ExtResource("1_37p78")
@@ -15,6 +15,7 @@ offset_bottom = -617.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="DateContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

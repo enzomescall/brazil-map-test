@@ -18,6 +18,7 @@ province_inspector = NodePath("TopBar/ProvinceInspector")
 game_manager = NodePath("../GameManager")
 
 [node name="ProvinceInspector" parent="TopBar" instance=ExtResource("7_i7141")]
+mouse_filter = 1
 
 [node name="VisualMap" type="Sprite2D" parent="."]
 texture = ExtResource("3_dwbse")
