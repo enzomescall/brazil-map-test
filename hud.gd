@@ -31,7 +31,7 @@ func _ready():
 	date_label.text = "DATE: 01/01/2025"
 	resources_label.text = "BRL: R$ 0.0 B"
 
-func _on_date_changed(new_date_string):
+func _on_date_changed(new_date_string: String):
 	# Using is_instance_valid() provides an extra layer of crash protection
 	if is_instance_valid(date_label):
 		date_label.text = "DATE: " + new_date_string
@@ -47,13 +47,13 @@ func _on_resources_updated(total_resources):
 func _on_pause_button_pressed():
 	game_manager.toggle_pause()
 	if game_manager.is_paused:
-		pause_button.text = "Resume (1x)"
+		pause_button.text = "Resume (" + str(game_manager.game_speed) + "x)"  
 	else:
 		pause_button.text = "Pause"
 		game_manager.set_speed(1) 
 
 func _on_speed_1x_button_pressed():
-	game_manager.set_speed(1)
+	game_manager.set_speed(5)
 	if game_manager.is_paused:
 		game_manager.toggle_pause()
 
@@ -63,6 +63,6 @@ func _on_speed_2x_button_pressed():
 		game_manager.toggle_pause()
 
 func _on_speed_5x_button_pressed():
-	game_manager.set_speed(5)
+	game_manager.set_speed(1)
 	if game_manager.is_paused:
 		game_manager.toggle_pause()

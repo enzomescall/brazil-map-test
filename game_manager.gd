@@ -50,5 +50,8 @@ func advance_day():
 	date_changed.emit(date_str)
 	resources_updated.emit(daily_national_income)
 
-func set_speed():
-	
+func set_speed(speed: int):
+	game_speed = speed
+
+func toggle_pause():
+	is_paused = !is_paused
