@@ -44,19 +44,26 @@ func _on_resources_updated(total_resources):
 
 # --- Button Handlers (Connected via the editor) ---
 
+# Button Handler Helper:
+func _set_game_speed_setting(speed: int) -> void:
+	print("Setting speed to %d" % speed)
+	game_manager.set_speed(speed)
+	if game_manager.is_paused:
+		pause_button.text = "Resume (%dx)" % game_manager.game_speed_setting  
+
 func _on_pause_button_pressed():
 	game_manager.toggle_pause()
 	if game_manager.is_paused:
-		pause_button.text = "Resume (" + str(game_manager.game_speed) + "x)"  
+		pause_button.text = "Resume (%dx)" % game_manager.game_speed_setting  
 	else:
 		pause_button.text = "Pause"
-		game_manager.set_speed(1) 
 
 func _on_speed_1x_button_pressed():
-	game_manager.set_speed(5)
+	_set_game_speed_setting(1)
 
 func _on_speed_2x_button_pressed():
-	game_manager.set_speed(2)
+	_set_game_speed_setting(2)
 
 func _on_speed_5x_button_pressed():
-	game_manager.set_speed(1)
+	_set_game_speed_setting(5)
+	

@@ -11,6 +11,7 @@ var year: int = 2025
 
 var is_paused: bool = false
 var game_speed_setting: int = 1 
+var game_speed: float = 1.0
 var time_accumulator: float = 0.0
 var national_treasury: float = 10_000_000_000.0 # Starting with R$ 10 Billion
 
@@ -27,8 +28,6 @@ const SPEED_MAP: Dictionary = {
 func _process(delta: float) -> void:
 	if is_paused:
 		return
-	
-	var game_speed: float = SPEED_MAP.get(game_speed_setting, 1.0)
 		
 	time_accumulator += delta
 	
@@ -71,10 +70,14 @@ func advance_day() -> void:
 # --- Control Functions for the UI ---
 
 func toggle_pause() -> void:
-	is_paused = not is_paused
+	if is_paused:
+		print("Unpausing...")
+	else:
+		print("Pausing...")
+	is_paused = !is_paused
 
 func set_speed(speed: int) -> void:
 	if SPEED_MAP.has(speed):
+		print("Setting speed to: %f" % SPEED_MAP.get(speed))
 		game_speed_setting = speed
-	if is_paused:
-		is_paused = true
+		game_speed = SPEED_MAP.get(speed)
