@@ -1,0 +1,28 @@
+{
+  "provinces": [
+	{
+	  "name": "Amazonas",
+	  "color_html": "2e6a32",
+	  "population": 4200000,
+	  "gdp_billions": 100.0
+	},
+	{
+	  "name": "São Paulo",
+	  "color_html": "2e6396",
+	  "population": 44000000,
+	  "gdp_billions": 600.0
+	},
+	{
+	  "name": "Rio de Janeiro",
+	  "color_html": "9b2e3b",
+	  "population": 17000000,
+	  "gdp_billions": 350.0
+	},
+	{
+	  "name": "Minas Gerais",
+	  "color_html": "b8860b",
+	  "population": 21000000,
+	  "gdp_billions": 250.0
+	}
+  ]
+}

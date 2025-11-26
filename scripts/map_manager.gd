@@ -19,21 +19,58 @@ func _ready() -> void:
 	if province_map_texture:
 		map_image = province_map_texture.get_image()
 	
-	setup_brazil_data()
+	var data = DataLoader.load_provinces_from_json()
+	if data.has("provinces"):
+		for p in data["provinces"]:
+			_register_province_from_json(p)
 	
 	if province_inspector:
 		province_selected.connect(province_inspector.update_province_data)
 
-func setup_brazil_data() -> void:
-	# Use colors from your map image (Amazonas, Sao Paulo, Rio, Minas)
-	register_province("Amazonas", Color.html("#00ff00"), 4200000, 100.0)
-	register_province("São Paulo", Color.html("#0000ff"), 44000000, 600.0)
-	register_province("Rio de Janeiro", Color.html("#ff0000"), 17000000, 200.0)
-	register_province("Minas Gerais", Color.html("#ffff00"), 21000000, 180.0)
+func _register_province_from_json(entry: Dictionary) -> void:
+	# --- Required fields ---
+	var name: String = entry.get("name", "")
+	var color_html: String = entry.get("color_html", "")
 
-func register_province(p_name: String, p_color: Color, p_pop: int, p_gdp: float) -> void:
-	var new_prov: ProvinceData = ProvinceData.new(p_name, p_color, p_pop, p_gdp)
-	province_registry[p_color.to_html(false)] = new_prov
+	if name == "" or color_html == "":
+		push_warning("Skipping province due to missing name or color_html: %s" % entry)
+		return
+
+	var color: Color = Color.html(color_html)
+
+	if color == null:
+		push_warning("Invalid color hex '%s' for province %s" % [color_html, name])
+		return
+
+	# --- Optional fields with defaults ---
+	var population: int = entry.get("population", 0)
+	var gdp_billions: float = entry.get("gdp_billions", 0.0)
+
+	register_province(name, color, population, gdp_billions)
+
+func register_province(
+		name: String,
+		color: Color,
+		population: int,
+		gdp_billions: float
+	) -> void:
+
+	var province := ProvinceData.new()
+	province.name = name
+	province.population = population
+	province.gdp_billions = gdp_billions
+	province.color = color
+
+	# Convert color to the same key format your SVG parsing uses
+	var html_key := color.to_html(false)  # "rrggbb"
+
+	# Store in registry > key: "rrggbb"
+	province_registry[html_key] = province
+
+	# Optional: if you track a list of provinces
+	if not provinces.has(province):
+		provinces.append(province)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	# DEBUG CHECK: This print will now only show up if the mouse input is NOT blocked by UI elements.
