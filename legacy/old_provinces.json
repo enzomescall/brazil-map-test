@@ -1,0 +1,166 @@
+{
+  "provinces": [
+	{
+	  "name": "Acre",
+	  "color_html": "00b044",
+	  "population": 906880,
+	  "gdp_billions_brl_2021": 21.374
+	},
+	{
+	  "name": "Alagoas",
+	  "color_html": "0035ee",
+	  "population": 3365350,
+	  "gdp_billions_brl_2021": 76.266
+	},
+	{
+	  "name": "Amapá",
+	  "color_html": "eeeb00",
+	  "population": 877610,
+	  "gdp_billions_brl_2021": 20.1
+	},
+	{
+	  "name": "Amazonas",
+	  "color_html": "ff7700",
+	  "population": 4270000,
+	  "gdp_billions_brl_2021": 131.531
+	},
+	{
+	  "name": "Bahia",
+	  "color_html": "ffc434",
+	  "population": 14985280,
+	  "gdp_billions_brl_2021": 352.618
+	},
+	{
+	  "name": "Ceará",
+	  "color_html": "948256",
+	  "population": 9240580,
+	  "gdp_billions_brl_2021": 194.885
+	},
+	{
+	  "name": "Distrito Federal",
+	  "color_html": "569194",
+	  "population": 3094330,
+	  "gdp_billions_brl_2021": 286.944
+	},
+	{
+	  "name": "Espírito Santo",
+	  "color_html": "ee3700",
+	  "population": 4108510,
+	  "gdp_billions_brl_2021": 186.337
+	},
+	{
+	  "name": "Goiás",
+	  "color_html": "205eb2",
+	  "population": 7206590,
+	  "gdp_billions_brl_2021": 269.628
+	},
+	{
+	  "name": "Maranhão",
+	  "color_html": "c600a5",
+	  "population": 7153260,
+	  "gdp_billions_brl_2021": 124.981
+	},
+	{
+	  "name": "Mato Grosso",
+	  "color_html": "07ee00",
+	  "population": 3567230,
+	  "gdp_billions_brl_2021": 233.39
+	},
+	{
+	  "name": "Mato Grosso do Sul",
+	  "color_html": "ee0000",
+	  "population": 2839190,
+	  "gdp_billions_brl_2021": 142.204
+	},
+	{
+	  "name": "Minas Gerais",
+	  "color_html": "7bdc3c",
+	  "population": 21411920,
+	  "gdp_billions_brl_2021": 857.593
+	},
+	{
+	  "name": "Pará",
+	  "color_html": "dc10de",
+	  "population": 8777120,
+	  "gdp_billions_brl_2021": 262.905
+	},
+	{
+	  "name": "Paraíba",
+	  "color_html": "e6da58",
+	  "population": 4059910,
+	  "gdp_billions_brl_2021": 77.47
+	},
+	{
+	  "name": "Paraná",
+	  "color_html": "c9ff59",
+	  "population": 11597480,
+	  "gdp_billions_brl_2021": 549.973
+	},
+	{
+	  "name": "Pernambuco",
+	  "color_html": "3da5ff",
+	  "population": 9674790,
+	  "gdp_billions_brl_2021": 220.814
+	},
+	{
+	  "name": "Piauí",
+	  "color_html": "8f5010",
+	  "population": 3289290,
+	  "gdp_billions_brl_2021": 64.028
+	},
+	{
+	  "name": "Rio de Janeiro",
+	  "color_html": "00eebd",
+	  "population": 17463350,
+	  "gdp_billions_brl_2021": 949.301
+	},
+	{
+	  "name": "Rio Grande do Norte",
+	  "color_html": "e67858",
+	  "population": 3560900,
+	  "gdp_billions_brl_2021": 80.181
+	},
+	{
+	  "name": "Rio Grande do Sul",
+	  "color_html": "59ffdd",
+	  "population": 11466630,
+	  "gdp_billions_brl_2021": 581.284
+	},
+	{
+	  "name": "Rondônia",
+	  "color_html": "5a7f33",
+	  "population": 1815280,
+	  "gdp_billions_brl_2021": 58.17
+	},
+	{
+	  "name": "Roraima",
+	  "color_html": "ddffc7",
+	  "population": 652710,
+	  "gdp_billions_brl_2021": 18.203
+	},
+	{
+	  "name": "Santa Catarina",
+	  "color_html": "e700ee",
+	  "population": 7338470,
+	  "gdp_billions_brl_2021": 428.571
+	},
+	{
+	  "name": "São Paulo",
+	  "color_html": "df59ff",
+	  "population": 46649130,
+	  "gdp_billions_brl_2021": 2719.751
+	},
+	{
+	  "name": "Sergipe",
+	  "color_html": "cec753",
+	  "population": 2338470,
+	  "gdp_billions_brl_2021": 51.861
+	},
+	{
+	  "name": "Tocantins",
+	  "color_html": "ff5252",
+	  "population": 1607360,
+	  "gdp_billions_brl_2021": 51.781
+	}
+  ]
+}

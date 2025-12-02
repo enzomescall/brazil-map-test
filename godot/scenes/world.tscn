@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://cevxesti3kxdh"]
+
+[ext_resource type="Script" uid="uid://btx2cprx1iaja" path="res://scripts/map_manager.gd" id="1_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://rmayp8g4gm3r" path="res://assets/map/map_provinces.png" id="2_036b0"]
+[ext_resource type="Texture2D" uid="uid://c2bnga7gc00ql" path="res://assets/map/map_visual.png" id="3_dwbse"]
+[ext_resource type="PackedScene" uid="uid://hnvqfomufyjs" path="res://scenes/hud.tscn" id="3_pkg7o"]
+[ext_resource type="Script" uid="uid://sry3gmf10d7p" path="res://scripts/strategy_camera.gd" id="4_036b0"]
+[ext_resource type="Script" uid="uid://di4qhhe4rjnjy" path="res://scripts/game_manager.gd" id="4_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://btl56c5l7t1cb" path="res://scenes/ProvinceInspector.tscn" id="7_i7141"]
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("visual_map_sprite", "province_inspector")]
+script = ExtResource("1_aqk2v")
+province_map_texture = ExtResource("2_036b0")
+visual_map_sprite = NodePath("VisualMap")
+province_inspector = NodePath("TopBar/ProvinceInspector")
+
+[node name="TopBar" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("3_pkg7o")]
+game_manager = NodePath("../GameManager")
+
+[node name="ProvinceInspector" parent="TopBar" instance=ExtResource("7_i7141")]
+mouse_filter = 1
+
+[node name="VisualMap" type="Sprite2D" parent="."]
+texture = ExtResource("3_dwbse")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_036b0")
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("map_manager")]
+script = ExtResource("4_pkg7o")
+map_manager = NodePath("..")

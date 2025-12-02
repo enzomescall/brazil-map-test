@@ -1,0 +1,14 @@
+{
+  "countries": [
+    {
+      "tag": "BRA",
+      "name": "Brazil",
+      "map_color": "00923f"
+    },
+    {
+      "tag": "ARG",
+      "name": "Argentina",
+      "map_color": "75aadb"
+    }
+  ]
+}
