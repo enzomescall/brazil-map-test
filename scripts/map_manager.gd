@@ -67,10 +67,6 @@ func register_province(
 	# Store in registry > key: "rrggbb"
 	province_registry[html_key] = province
 
-	# Optional: if you track a list of provinces
-	if not provinces.has(province):
-		provinces.append(province)
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	# DEBUG CHECK: This print will now only show up if the mouse input is NOT blocked by UI elements.
